@@ -1,38 +1,40 @@
-#DAKSH SAHU E22CSEU1025
 class Employee:
-    def _init_(self, emp_id, name, age, salary):
-        self.emp_id, self.name, self.age, self.salary = emp_id, name, age, salary
+    def __init__(self, emp_id, name, age, salary):
+        self.emp_id = emp_id
+        self.name = name
+        self.age = age
+        self.salary = salary
 
-    def _str_(self):
+    def __str__(self):
         return f"Employee ID: {self.emp_id}, Name: {self.name}, Age: {self.age}, Salary: {self.salary}"
 
 class EmployeeDatabase:
-    def _init_(self):
+    def __init__(self):
         self.employees = []
 
     def add_employee(self, employee):
         self.employees.append(employee)
 
     def search(self, criteria):
-        if criteria[0] == 'age':
+        if criteria[0] == "age":
             return [emp for emp in self.employees if emp.age == int(criteria[1])]
-        elif criteria[0] == 'name':
+        elif criteria[0] == "name":
             return [emp for emp in self.employees if criteria[1].lower() in emp.name.lower()]
-        elif criteria[0] == 'salary':
+        elif criteria[0] == "salary":
             condition, salary = criteria[1], float(criteria[2])
-            if condition == '>':
+            if condition == ">":
                 return [emp for emp in self.employees if emp.salary > salary]
-            elif condition == '<':
+            elif condition == "<":
                 return [emp for emp in self.employees if emp.salary < salary]
-            elif condition == '>=':
+            elif condition == ">=":
                 return [emp for emp in self.employees if emp.salary >= salary]
-            elif condition == '<=':
+            elif condition == "<=":
                 return [emp for emp in self.employees if emp.salary <= salary]
         return []
 
-if __name__ == "_main_":
+if __name__ == "__main__":
     db = EmployeeDatabase()
-    
+
     data = [
         ("161E90", "Raman", 41, 56000),
         ("161F91", "Himadri", 38, 67500),
@@ -52,13 +54,13 @@ if __name__ == "_main_":
 
     criteria = []
     if option == 1:
-        criteria = ['age', int(input("Enter age to search: "))]
+        criteria = ["age", int(input("Enter age to search: "))]
     elif option == 2:
-        criteria = ['name', input("Enter name to search: ")]
+        criteria = ["name", input("Enter name to search: ")]
     elif option == 3:
         condition = input("Enter salary condition (>, <, >=, <=): ")
         salary = float(input("Enter salary: "))
-        criteria = ['salary', condition, salary]
+        criteria = ["salary", condition, salary]
 
     result = db.search(criteria)
 
